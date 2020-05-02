@@ -1,6 +1,8 @@
 class Problem
   attr_reader :expr, :ans
 
+  # TODO: Implement varying difficulty levels
+
   def initialize
     @expr = gen_expr
     @ans = eval @expr
