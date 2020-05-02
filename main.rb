@@ -1,7 +1,7 @@
 require_relative "problem"
 
 # TODO: Save best times to a local txt file
-
+#       - Be sure to string format the times properly
 num_probs = 0
 PROB_LIM = 5  # Hard-code this for now
 while num_probs < PROB_LIM
