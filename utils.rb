@@ -7,8 +7,7 @@ module Utils
     entries = self.parse_entries(content)
     entries.append([t_elapsed, score])
 
-    # TODO: Come up with way to evaluate time and score together?
-    entries = entries.sort_by{ |e| [Time.parse(e[0]), -e[1].to_r]}
+    entries = entries.sort_by{ |e| self.evaluate_entry(e) }
     entries = entries.slice(0, 3) if entries.length > 3
 
     return self.gen_scores_content(entries)
@@ -56,6 +55,25 @@ module Utils
     # return: A formatted string containing the information
     #         for an entry scores file
     # rtype: String
-    return "#{rank+1}. #{info[0]}, #{info[1].to_r.to_s}"
+    return "#{rank+1}. #{info[0]}, #{info[1]}"
   end
+
+
+  def self.evaluate_entry(entry)
+    # Evaluates an entry to be inserted in the scores
+    # file based on the entry's completion time and score
+    # @param entry: The entry to evaluate
+    # return: A score for the provided entry
+    # rtype: float
+
+    time_w = 1
+    score_w = 20
+    # . Entries would be sorted in ascending order.
+    #   Here is what would contribute to a good score:
+    #   - For entry[0], smaller time
+    #   - For entry[1], larger negative quotient
+    return Time.parse(entry[0]).to_f*time_w +
+           (-entry[1].to_r.to_f)*score_w
+  end
+
 end

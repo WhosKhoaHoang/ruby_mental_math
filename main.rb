@@ -3,7 +3,6 @@ require_relative "utils"
 require_relative "problem"
 
 # TODO: Unhardcode PROB_LIM
-
 num_probs = 0
 PROB_LIM = 5  # Hard-code this for now
 
@@ -32,6 +31,7 @@ t_elapsed = Time.at(t2-t1).utc.strftime("%H:%M:%S.%2N")
 score = num_correct.to_s+"/"+PROB_LIM.to_s
 puts t_elapsed
 puts score
+
 
 if File.exists? "scores.txt"
   scores_content = Utils.process_scores(t_elapsed, score)
